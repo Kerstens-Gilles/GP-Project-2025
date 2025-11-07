@@ -1,17 +1,19 @@
 #include "Logic/World/Stopwatch.h"
+#include "Display/Game.h"
 
 #include <iostream>
 
 std::shared_ptr<Logic::Stopwatch> Logic::Stopwatch::watchPtr = nullptr;
 
 int main() {
+    std::cout << "STARTED PACMAN" << std::endl;
     std::shared_ptr<Logic::Stopwatch> watch = Logic::Stopwatch::getInstance();
 
-    int i = 0;
-    while (i < 60) {
+    Display::Game g = Display::Game();
+
+    while (g.windowIsOpen()) {
         if (watch->nextFrame()) {
-            i++;
-            std::cout << i << std::endl;
+            g.checkWindowEvents();
         }
     }
 

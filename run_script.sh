@@ -7,4 +7,7 @@ cd ./build/
 cmake ..
 make
 
-valgrind ./SRC/PACMAN
+echo "Running"
+#./SRC/PACMAN
+valgrind -s --leak-check=full ./SRC/PACMAN
+echo "Finnished"
