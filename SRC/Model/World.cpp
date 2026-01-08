@@ -4,6 +4,7 @@
 #include "Subjects/Wall.h"
 
 #include <cmath>
+#include <cstdlib>
 #include <memory>
 #include <utility>
 
@@ -60,7 +61,10 @@ bool CoinCollision(std::shared_ptr<Logic::Pacman> P, std::shared_ptr<Logic::Coin
     std::pair<double, double> PCoords = P->getCoords();
     std::pair<double, double> CCoords = C->getCoords();
 
-    if (std::abs(PCoords.first - CCoords.first) < 0.25 and std::abs(PCoords.second - CCoords.second) < 0.25) {
+    if (
+        PCoords.first < CCoords.first + 0.25  && PCoords.first + 1 > CCoords.first &&
+        PCoords.second < CCoords.second + 0.25 && PCoords.second + 1 > CCoords.second
+    ) {
         C->Consume();
         C->notify();
 
