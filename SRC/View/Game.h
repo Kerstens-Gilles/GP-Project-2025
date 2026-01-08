@@ -24,7 +24,7 @@ namespace Display {
             void checkWindowEvents();
 
             void checkController() const;
-            void renderFrame() const;
+            void renderFrame();
 
             void addSub(const std::shared_ptr<Subject> sub);
             void addController(const std::shared_ptr<Controller::Pacman> p);

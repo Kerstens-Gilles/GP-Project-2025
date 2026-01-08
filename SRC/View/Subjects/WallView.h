@@ -7,7 +7,7 @@ namespace Display {
     class Wall : public Subject{
         public:
             Wall() = delete;
-            ~Wall() = default;
+            ~Wall() override = default;
 
             Wall(float x, float y, int screenSize);
 

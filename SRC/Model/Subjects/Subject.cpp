@@ -17,3 +17,7 @@ void Subject::addSub(std::shared_ptr<Observer> sub) {
 std::pair<double, double> Subject::getCoords() const {
     return {x, y};
 }
+
+void Subject::Consume() {
+    consumed = true;
+}

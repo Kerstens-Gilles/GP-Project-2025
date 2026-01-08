@@ -1,6 +1,8 @@
 #include "Logic/Stopwatch.h"
 
+#include "Model/Subjects/Coin.h"
 #include "View/Game.h"
+#include "View/Subjects/CoinView.h"
 #include "View/Subjects/WallView.h"
 #include "View/Subjects/PacmanView.h"
 
@@ -74,6 +76,17 @@ int main() {
         wall->notify();
 
         G->addSub(disp_Wall);
+    }
+
+    for (int i=1; i<32; i++) {
+        std::shared_ptr<Logic::Coin> coin = std::make_shared<Logic::Coin>(Logic::Coin(0.25 + i, 28));
+        W->addCoin(coin);
+
+        std::shared_ptr<Display::Coin> disp_Coin = std::make_shared<Display::Coin>(Display::Coin(0, 0, screenSize));
+        coin->addSub(disp_Coin);
+        coin->notify();
+
+        G->addSub(disp_Coin);
     }
 
     while (G->windowIsOpen()) {

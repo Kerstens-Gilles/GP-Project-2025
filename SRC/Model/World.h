@@ -5,6 +5,7 @@
 #include "./Subjects/Pacman.h"
 
 #include "../Logic/Stopwatch.h"
+#include "Subjects/Coin.h"
 
 #include <memory>
 #include <set>
@@ -14,6 +15,7 @@ class World {
         World() = default;
 
         void addWall(const std::shared_ptr<Logic::Wall> w);
+        void addCoin(const std::shared_ptr<Logic::Coin> c);
         void addPacman(const std::shared_ptr<Logic::Pacman> w);
 
         void simulate();
@@ -22,6 +24,7 @@ class World {
 
     private:
         std::set<std::shared_ptr<Logic::Wall>> Walls;
+        std::set<std::shared_ptr<Logic::Coin>> Coins;
         
         std::shared_ptr<Logic::Pacman> Pacman;
 

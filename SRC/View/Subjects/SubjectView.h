@@ -13,11 +13,13 @@ namespace Display {
             Subject() = delete;
             virtual ~Subject() override = default;
 
-            Subject(float x, float y, int screenSize);
+            Subject(float x, float y, int screenSize, const double size = 1);
 
             [[nodiscard]] std::shared_ptr<sf::RectangleShape> getShape() const;
 
             void update(double logic_x, double logic_y, bool eaten) override;
+
+            bool isConsumed() const;
 
         protected:
             std::shared_ptr<sf::RectangleShape> sub;

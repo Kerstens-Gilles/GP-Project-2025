@@ -1,19 +1,25 @@
 #include "./World.h"
+#include "Subjects/Coin.h"
 #include "Subjects/Pacman.h"
 #include "Subjects/Wall.h"
 
 #include <cmath>
 #include <memory>
+#include <utility>
 
 void World::addWall(const std::shared_ptr<Logic::Wall> w) {
     Walls.insert(w);
+}
+
+void World::addCoin(const std::shared_ptr<Logic::Coin> c) {
+    Coins.insert(c);
 }
 
 void World::addPacman(const std::shared_ptr<Logic::Pacman> p) {
     Pacman = p;
 }
 
-void WallCollision(std::shared_ptr<Logic::Pacman> P, std::shared_ptr<Logic::Wall>W) {
+void WallCollision(std::shared_ptr<Logic::Pacman> P, std::shared_ptr<Logic::Wall> W) {
     if (P->getDirection() == -1) {
         return;
     }
@@ -50,11 +56,32 @@ void WallCollision(std::shared_ptr<Logic::Pacman> P, std::shared_ptr<Logic::Wall
     return;
 }
 
+bool CoinCollision(std::shared_ptr<Logic::Pacman> P, std::shared_ptr<Logic::Coin> C) {
+    std::pair<double, double> PCoords = P->getCoords();
+    std::pair<double, double> CCoords = C->getCoords();
+
+    if (std::abs(PCoords.first - CCoords.first) < 0.25 and std::abs(PCoords.second - CCoords.second) < 0.25) {
+        C->Consume();
+        C->notify();
+
+        return true;
+    }
+    return false;
+}
+
 void World::simulate() {
     Pacman->move();
 
     for (auto w: Walls) {
         WallCollision(Pacman, w);
+    }
+
+    for (auto it=Coins.begin(); it!=Coins.end(); ) {
+        if (CoinCollision(Pacman, (*it))) {
+            Coins.erase(it++);
+        } else {
+            it++;
+        }
     }
 
     Pacman->notify();

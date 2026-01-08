@@ -21,6 +21,8 @@ namespace Logic {
             void addSub(std::shared_ptr<Observer> sub);
             [[nodiscard]] std::pair<double, double> getCoords() const;
 
+            void Consume();
+
         protected:
             double x;
             double y;

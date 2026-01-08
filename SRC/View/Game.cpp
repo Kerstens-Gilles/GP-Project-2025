@@ -28,12 +28,17 @@ void Game::checkController() const {
     pacmanControl->notify();
 }
 
-void Game::renderFrame() const {
+void Game::renderFrame() {
     window->clear(sf::Color::Black);
 
-    for (auto& s: subjects) {
-        std::shared_ptr<sf::RectangleShape> sub = s->getShape();
-        window->draw(*sub);
+    for (auto it=subjects.begin(); it!=subjects.end(); ) {
+        if ((*it)->isConsumed()) {
+            subjects.erase(it++);
+        } else {
+            std::shared_ptr<sf::RectangleShape> sub = (*it)->getShape();
+            window->draw(*sub);
+            it++;
+        }
     }
 
     window->display();
