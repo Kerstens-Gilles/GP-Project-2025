@@ -2,8 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <iostream>
-
 using namespace Controller;
 
 Pacman::Pacman(std::shared_ptr<Controller::Observer> p) : p(p) {}
