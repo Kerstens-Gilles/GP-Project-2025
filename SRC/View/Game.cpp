@@ -24,17 +24,17 @@ void Game::checkWindowEvents() {
     }
 }
 
-void Game::renderFrame() {
-    window->clear(sf::Color::Black);
+void Game::checkController() const {
+    pacmanControl->notify();
+}
 
-    pacman->move();
+void Game::renderFrame() const {
+    window->clear(sf::Color::Black);
 
     for (auto& s: subjects) {
         std::shared_ptr<sf::RectangleShape> sub = s->getShape();
         window->draw(*sub);
     }
-
-    //window->draw(*(pacman->getShape()));
 
     window->display();
 }
@@ -43,6 +43,6 @@ void Game::addSub(const std::shared_ptr<Subject> sub) {
     subjects.insert(sub);
 }
 
-void Game::setPacman(const std::shared_ptr<Display::Pacman> p) {
-    pacman = p;
+void Game::addController(const std::shared_ptr<Controller::Pacman> p) {
+    pacmanControl = p;
 }

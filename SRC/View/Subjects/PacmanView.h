@@ -11,8 +11,6 @@ namespace Display {
 
             Pacman(float x, float y, int screenSize);
 
-            void update();
-
             void move();
 
         private:

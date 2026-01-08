@@ -11,7 +11,7 @@ namespace Display {
     class Subject : public Logic::Observer {
         public:
             Subject() = delete;
-            virtual ~Subject() = default;
+            virtual ~Subject() override = default;
 
             Subject(float x, float y, int screenSize);
 

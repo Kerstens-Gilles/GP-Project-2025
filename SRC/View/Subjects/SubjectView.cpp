@@ -2,7 +2,7 @@
 
 using namespace Display;
 
-Subject::Subject(float x, float y, int screenSize) : screenSize(screenSize) {
+Subject::Subject(float x, float y, int screenSize) : Logic::Observer(), screenSize(screenSize) {
     sub = std::make_shared<sf::RectangleShape>(sf::Vector2f((float(screenSize) / 33), float(screenSize) / 33));
     sub->setPosition(x, y);
 }

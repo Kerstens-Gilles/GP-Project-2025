@@ -13,3 +13,7 @@ void Subject::notify() const {
 void Subject::addSub(std::shared_ptr<Observer> sub) {
     subscribers.push_back(sub);
 }
+
+std::pair<double, double> Subject::getCoords() const {
+    return {x, y};
+}

@@ -11,8 +11,6 @@ namespace Display {
 
             Wall(float x, float y, int screenSize);
 
-            void update();
-
         private:
 
             // observed = wall in LOGIC

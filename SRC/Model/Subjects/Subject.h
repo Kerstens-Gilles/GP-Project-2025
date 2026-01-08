@@ -12,16 +12,20 @@ namespace Logic {
         public:
             Subject() = delete;
             Subject(const double x, const double y);
+            virtual ~Subject() = default;
 
             [[nodiscard]] std::pair<double, double> getLocation() const;
 
             void notify() const;
 
             void addSub(std::shared_ptr<Observer> sub);
+            [[nodiscard]] std::pair<double, double> getCoords() const;
 
-        private:
+        protected:
             double x;
             double y;
+        
+        private:
 
             bool consumed = false;
 
