@@ -1,30 +1,31 @@
-#ifndef MODEL_SUBJECT_H
-#define MODEL_SUBJECT_H
-
-#include <utility>
-#include <set>
-#include <memory>
+#ifndef SUBJECT_H
+#define SUBJECT_H
 
 #include "../Observers/Observer.h"
+
+#include <utility>
+#include <vector>
+#include <memory>
 
 namespace Logic {
     class Subject {
         public:
             Subject() = delete;
-            Subject(double x, double y);
-            ~Subject() = default;
+            Subject(const double x, const double y);
 
-            [[ nodiscard ]] std::pair<double, double> getLocation() const;
-            void subscribe(std::shared_ptr<Observer> sub);
-            void unsubscribe(std::shared_ptr<Observer> sub); // maybe not needed
+            [[nodiscard]] std::pair<double, double> getLocation() const;
 
-            virtual void notify() = 0;
+            void notify() const;
+
+            void addSub(std::shared_ptr<Observer> sub);
 
         private:
             double x;
             double y;
 
-            std::set<std::shared_ptr<Observer>> subs;
+            bool consumed = false;
+
+            std::vector<std::shared_ptr<Observer>> subscribers;
     };
 }
 

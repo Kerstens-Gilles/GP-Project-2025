@@ -4,12 +4,10 @@
 namespace Logic {
     class Observer {
         public:
-            Observer() = default;
-            ~Observer() = default;
-
-            virtual void Update() = 0;
+            virtual void update(double x, double y, bool eaten) = 0;
+        
         private:
-            
+
     };
 }
 

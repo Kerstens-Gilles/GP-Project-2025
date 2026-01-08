@@ -1,19 +1,15 @@
-#include "./Subject.h"
-
-#include <utility>
+#include "Subject.h"
 
 using namespace Logic;
 
-Subject::Subject(double x, double y) : x(x), y(y) {}
+Subject::Subject(const double x, const double y) : x(x), y(y){};
 
-std::pair<double, double> Subject::getLocation() const {
-    return {x, y};
+void Subject::notify() const {
+    for (auto s: subscribers) {
+        s->update(x, y, consumed);
+    }
 }
 
-void Subject::subscribe(std::shared_ptr<Observer> sub) {
-    subs.insert(sub);
-}
-
-void Subject::unsubscribe(std::shared_ptr<Observer> sub) {
-    subs.erase(sub);
+void Subject::addSub(std::shared_ptr<Observer> sub) {
+    subscribers.push_back(sub);
 }
